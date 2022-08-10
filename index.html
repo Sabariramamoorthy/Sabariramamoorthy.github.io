@@ -1,84 +1,341 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
+<html lang="en">
+  <title>SR GIFTS & DESIGNS </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="logo.png">
+   
+    <style>
+      body {
+        letter-spacing: 0.8px;
+        background: linear-gradient(0deg, #fff, 50%, #ffffff);
+        background-repeat: no-repeat
+      }
 
-<body>
-<div style="text-align: center;margin-top: 50px;">
-    <h2>HAPPY LANDING BIRTHDAY GIRL</h2>
-<br>
-<br>
-    <img src="206737580.jpeg" alt="Trulli"  id="image" width="300" height="300" onclick="myclick()">
+      .container-fluid {
+        margin-top: 20px !important;
+        margin-bottom: 80px !important
+      }
 
-    <div style="visibility: hidden;" id="hbd">
+      p {
+        font-size: 14px;
+        margin-bottom: 7px
+      }
 
-        <H1>HAPPY BIRTHDAY MOUNIKA</h>
-            <br>
-            <br>
-           
-        <img src="206737580 copy.jpg" alt="Trulli"  id="soffiaimage" width="300" height="300" onclick="myclick()">
-<p style="text-align: left;font-weight: lighter;padding: 10px;">
-   I hope you have the happiest of birthdays!
-</p>
-    </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
-<script>
- $(document).ready(function() {
-  $('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').parent().closest('a').closest('div').remove();
-    $(".disclaimer").hide();
-});   
-    async function myclick()
-    {
-        document.getElementById("hbd").style.visibility="visible"
-        document.getElementById("hbd").style.display="block"
-        
-        document.getElementById("image").style.visibility="hidden"
-        document.getElementById("image").style.display="none"
+      .cursor-pointer {
+        cursor: pointer
+      }
 
-        var audio = new Audio('yen endral un pirantha naal whatsapp status tamil.     Birthday whatsapp status Tamil(MP3_320K).mp3');
-        audio.play();
+      a {
+        text-decoration: none !important;
+        color: #651FFF !important
+      }
 
+      .bold {
+        font-weight: 600
+      }
 
-        var slides = document.getElementById("soffiaimage");
-    await sleep(1500);
-    slides.src="1.jpg";
-    await sleep(1500);
-    slides.src="2.jpg";
-    await sleep(1500);
-    slides.src="2.jpg";
-    await sleep(1500);
-    slides.src="3.jpg";
-    await sleep(1500);
-    slides.src="4.jpg";
-    await sleep(1500);
-    slides.src="1.jpg";
-    await sleep(1500);
-    slides.src="2.jpg";
-    await sleep(1500);
-    slides.src="2.jpg";
-    await sleep(1500);
-    slides.src="3.jpg";
-    await sleep(1500);
-    slides.src="4.jpg";
-    await sleep(1500);
-    slides.src="1.jpg";
-    await sleep(1500);
-    slides.src="2.jpg";
-    await sleep(1500);
-    slides.src="2.jpg";
-    await sleep(1500);
-    slides.src="3.jpg";
-    await sleep(1500);
-    slides.src="4.jpg";
+      .small {
+        font-size: 12px !important;
+        letter-spacing: 0.5px !important
+      }
+
+      .Today {
+        color: rgb(83, 83, 83)
+      }
+
+      .btn-outline-primary {
+        background-color: #fff !important;
+        color: #4bb8a9 !important;
+        border: 1.3px solid #4bb8a9;
+        font-size: 12px;
+        border-radius: 0.4em !important
+      }
+
+      .btn-outline-primary:hover {
+        background-color: #4bb8a9 !important;
+        color: #fff !important;
+        border: 1.3px solid #4bb8a9
+      }
+
+      .btn-outline-primary:focus,
+      .btn-outline-primary:active {
+        outline: none !important;
+        box-shadow: none !important;
+        border-color: #42A5F5 !important
+      }
+
+      #progressbar {
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: #455A64;
+        padding-left: 0px;
+        margin-top: 30px
+      }
+
+      #progressbar li {
+        list-style-type: none;
+        font-size: 13px;
+        width: 33.33%;
+        float: left;
+        position: relative;
+        font-weight: 400;
+        color: #455A64 !important
+      }
+
+      #progressbar #step1:before {
+        content: "1";
+        color: #fff;
+        width: 29px;
+        margin-left: 15px !important;
+        padding-left: 11px !important
+      }
+
+      #progressbar #step2:before {
+        content: "2";
+        color: #fff;
+        width: 29px
+      }
+
+      #progressbar #step3:before {
+        content: "3";
+        color: #fff;
+        width: 29px;
+        margin-right: 15px !important;
+        padding-right: 11px !important
+      }
+
+      #progressbar li:before {
+        line-height: 29px;
+        display: block;
+        font-size: 12px;
+        background: #455A64;
+        border-radius: 50%;
+        margin: auto
+      }
+
+      #progressbar li:after {
+        content: '';
+        width: 121%;
+        height: 2px;
+        background: #455A64;
+        position: absolute;
+        left: 0%;
+        right: 0%;
+        top: 15px;
+        z-index: -1
+      }
+
+      #progressbar li:nth-child(2):after {
+        left: 50%
+      }
+
+      #progressbar li:nth-child(1):after {
+        left: 25%;
+        width: 121%
+      }
+
+      #progressbar li:nth-child(3):after {
+        left: 25% !important;
+        width: 50% !important
+      }
+
+      #progressbar li.active:before,
+      #progressbar li.active:after {
+        background: #4bb8a9
+      }
+
+      .card {
+        background-color: #fff;
+        box-shadow: 2px 4px 15px 0px rgb(0, 108, 170);
+        z-index: 0
+      }
+
+      small {
+        font-size: 12px !important
+      }
+
+      .order{
+        color: #041369;text-align:center;margin-top: 5px;margin-bottom: 5px;font-size: small;
+      }
+      .noorder{
+        color: #d62e04;text-align:center;margin-top: 5px;margin-bottom: 5px;font-size: 10px;
+      }
+      a:link {
+  color: rgb(3, 79, 122);
+  background-color: transparent;
+  text-decoration: none;
+}
+      .a {
+        justify-content: space-between !important
+      }
+
+      .border-line {
+        border-right: 1px solid rgb(226, 206, 226)
+      }
+
+      .card-footer img {
+        opacity: 0.3
+      }
+
+      .card-footer h5 {
+        font-size: 1.1em;
+        color: #8C9EFF;
+        cursor: pointer
+      }
+      .prodcutImage{
+        border: 5.5px solid rgb(0, 0, 0); 
+        margin-left: 25px;      
+      }
+      @media only screen and (max-width: 600px) {
+        .prodcutImage{
+        border: 2.5px solid rgb(0, 0, 0);
+        margin-left: 0px;
+      }   
     }
+    </style>
+  </head>
+  <body >
+    <div style="text-align: center;margin-top: 30px;">
+      <button type="button" class="btn btn-outline-primary" style="font-size: larger;font-weight: bold;">SR GIFTS AND DESIGNS</button>
+    </div>
+    <div class="container-fluid my-5 d-sm-flex justify-content-center">
+      <div class="card px-2">
+        <div class="card-header bg-white">
+          <div class="row justify-content-between">
+            <div class="col">
+              <p class="font-weight-bold text-muted" > Hi Customer, 
+              </p>
+              <p class="text-muted"> Today <span id="date" class="font-weight-bold text-dark">12,March 2019</span>
+              </p>
+            </div>
+            <div class="flex-col my-auto">
+              <h6 class="ml-auto mr-3">
+                <img class="align-self-center img-fluid" src="/logo.png" width="50 " height="50">
+              </h6>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="media flex-column flex-sm-row">
+            <div class="media-body ">
+              <p class="text-muted " id="FrameSize"> Search Your Order by Phone No:</p>
+              <input type="text" id="Searchnumber" class="btn btn-outline-primary d-flex" style="margin-top: 20px;margin-bottom: 10px;" placeholder="Enter Your Primary No"></input>
+              <button type="button" id="Satus" class="btn btn-outline-primary d-flex" onclick="searchdata()">Search</button>             
+              <br>
+            </div>  
+          </div>
+          <div>
+            <p class="bold btn-outline-primary" style=" color: #4bb8a9;text-align: center;margin-bottom: 20px;">Placed Orders</p>     
+            <div id="orderTab">
+              <!-- <a href="Tracking.html?OrderNo=20222710"><p class="order">Abarna - Spotify Frame without lyrical</p></a>  -->
+            </div>
+          </div>
+        </div>
+        <br>
+        <div class="card-footer bg-white px-sm-3 pt-sm-4 px-0">
+          <div class="row text-center ">
+            <div class="col my-auto border-line " >
+              <a   href="https://instagram.com/sr_gifts_designs">Instagram</a>
+            </div>
+            <div class="col my-auto border-line ">
+              <a href="https://wa.me/message/J64HACHPHLHDC1">Whatsapp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.0.7/compressor.js" integrity="sha512-507fGdRv/mYPji0WAaq0d5Jvmo8CzqvPEmv3H6dSb+q0Rc2RaauF5jr37Vcx+lVT/8XAU5vff3HxfqNlwtqYhg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
+  <script>
+$(document).ready(function() {
+  $('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').parent().closest('a').closest('div').remove();
+  getDownloaD ();  
+});
 
-    function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
- }
-</script>
+var firebaseConfig = {
+    apiKey: "AIzaSyAJBdhYlg5xFu1MQOzPQjaiWyheBOHMAN0",
+    authDomain: "srgifts-4cccb.firebaseapp.com",
+    databaseURL: "https://srgifts-4cccb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "srgifts-4cccb",
+    storageBucket: "srgifts-4cccb.appspot.com",
+    messagingSenderId: "662372730784",
+    appId: "1:662372730784:web:f9c8ffc3a7e48f7ea0c6c5",
+    measurementId: "G-JLV996E31W"
+};
 
-</body>
+firebase.initializeApp(firebaseConfig);
+
+var list=[];
+var NoOrder="Y";
+function getDownloaD (){ 
+  const d=new Date()
+  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var OrderDateToday=d.getDate()+", "+months[d.getMonth()] +" "+d.getFullYear();
+  document.getElementById("date").innerText =OrderDateToday;
+ 
+   //console.log(OrderNo); 
+
+  
+
+   firebase.database().ref('OrdertoEdit').once('value', function(AllRecords) {
+			AllRecords.forEach(function(CurrenRecord) {
+				var orderno = (String(CurrenRecord.val().OrderNo).split("-"))[1]
+				var page = CurrenRecord.val().Pagename;
+				var productName = CurrenRecord.val().ProductName;
+				var Framesize = CurrenRecord.val().framesize;
+        var PrimaryNo = CurrenRecord.val().PrimaryPhoneNo;
+				var Address = (String(CurrenRecord.val().address).split("\n"))[0];
+				list.push({
+					OrderNo: orderno,
+					ProductName: productName,
+					framesize: Framesize,
+					address: Address,
+					Pagename: page,
+					PrimaryPhoneNo: PrimaryNo		
+				})
+			});
+			//console.log(list);
+		});
+}
+
+function searchdata() {
+  
+  var PrimaryPhoneNo=document.getElementById("Searchnumber").value;
+  //console.log(PrimaryPhoneNo);
+		list.forEach((element, index, array) => {
+      //console.log(String(list[index].PrimaryPhoneNo));
+				if(String(list[index].PrimaryPhoneNo) == PrimaryPhoneNo) 
+        {				
+        NoOrder="N"	;
+        //console.log(list[index])
+        writeHTMLasJS(list[index].OrderNo,String(list[index].address)+"-"+String(list[index].ProductName));
+        }
+			})
+  if (NoOrder=="Y")
+  {
+var code = "";
+code += "  <a><p class=\"noorder\">No Order Available for the Phone Number.</p></a>";
+code += "  <a><p class=\"noorder\">For Further info Contact us</p></a>";
+
+document.getElementById("orderTab").innerHTML = code;
+  }
+           	
+	}
+  function writeHTMLasJS(orderno,name){   
+var code = "";
+code += "  <a href = \"Tracking.html?OrderNo="+orderno+"\" ><p class=\"order\"> <u>"+name+" </u></p></a>";
+document.getElementById("orderTab").innerHTML += code;
+}
+    </script>
+  </body>
 </html>
-
