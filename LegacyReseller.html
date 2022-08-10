@@ -145,6 +145,21 @@ tr:nth-child(even) {
 		}) : XLSX.writeFile(wb, fn || ('Orders.' + (type || 'xlsx')));
 	}
 	var list = [];
+	var monthsText = {};
+    //#region address
+    
+    monthsText["January"] = 1;
+    monthsText["February"] = 2;
+    monthsText["March"] = 3;
+    monthsText["April"] = 4;
+    monthsText["May"] = 5;
+    monthsText["June"] = 6;
+    monthsText["July"] = 7;
+    monthsText["August"] = 8;
+    monthsText["September"] = 9;
+    monthsText["October"] = 10;
+    monthsText["November"] = 11;
+    monthsText["December "] = 12;
 
 	function SelectallData() {
 		firebase.database().ref('OrdertoEdit').once('value', function(AllRecords) {
@@ -158,6 +173,16 @@ tr:nth-child(even) {
 				var Address = CurrenRecord.val().address;
 				var Text = CurrenRecord.val().text;
 				var Info = CurrenRecord.val().info;
+				var date =String(CurrenRecord.val().OrderDate);
+        var Disdate=String(CurrenRecord.val().OrderDate);
+        //6,February,2022
+        //7, February 2022
+        date=date.replace(","," ");
+        date=date.replace(","," ");
+        date=date.replace("  "," ");
+        date=date.split(" ")[2]+'-'+monthsText[(date.split(" ")[1])]+'-'+date.split(" ")[0]
+
+
 				var trackingId = CurrenRecord.val().TrackingId;
 				if(trackingId == "N") {
 					trackingId = "Available after Dispatch"
@@ -173,12 +198,15 @@ tr:nth-child(even) {
 					text: Text,
 					info: Info,
 					Status: status,
+					DAte:date,
 					TrackingId: trackingId,
 					editedImage: EditedImage,
-					mainimage: Mainimage
+					mainimage: Mainimage,
+					sortdate: new Date(date)		
 				})
 				i = i + 1;
 			});
+			list.sort((a, b) => a.sortdate - b.sortdate)
 			createElement();
 		});
 	
