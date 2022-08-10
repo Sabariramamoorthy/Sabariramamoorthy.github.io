@@ -8,6 +8,10 @@ switch(ResellerName) {
     ResellerNumber = "8089091319";
   break;
 
+   case "Loverskart":
+    ResellerNumber = "8098093969";
+  break;
+  
   case "Giftspot":
     ResellerNumber = "8668139196";
   break;
@@ -269,21 +273,12 @@ function getFileUrl(filename) {
 
 function createAddress(){
 var address= document.getElementById("Name").value
-+"\n"+document.getElementById("DoorNo").value
-+"\n"+document.getElementById("Postal").value
-+"\n"+document.getElementById("District").value
-+"\n"+document.getElementById("State").value
-+"\n"+ document.getElementById("Pincode").value
-+"\n"+document.getElementById("Landmark").value
-+"\n"+document.getElementById("phone").value
-+"\n"+document.getElementById("Alterphone").value
++"\n"+document.getElementById("address").value
 +"\n"+"From Address"
 +"\n"+ResellerName
 +"\n"+ResellerNumber;
 return address;
 }
-
-
 
 function OrderSize(){
   if (document.getElementById("framesize").value == "Other"){
@@ -314,15 +309,16 @@ function mainImage(filename){
 		});
 }
 
+
 function UploadInformation (fileURL) {
   var random=Math.floor((Math.random() * 20) + 1);
   const d=new Date()
   var dateValue=d.getFullYear().toString()+(d.getMonth()+1).toString()+d.getDate().toString();
-  
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var OrderDateToday=d.getDate()+", "+months[d.getMonth()] +" "+d.getFullYear();
-  firebase.database().ref('OrdertoEdit/Order-'+dateValue+random).set({
-  OrderNo:"Order-"+dateValue+random,
+  console.log(OrderCount+1)
+  firebase.database().ref('OrdertoEdit/Order-'+(d.getFullYear()).toString()+(OrderCount+1)).set({
+  OrderNo:"Order-"+(d.getFullYear()).toString()+(OrderCount+1),
   ProductName:OrderType() ,
   framesize:OrderSize(),
   address:createAddress() ,
@@ -337,7 +333,7 @@ function UploadInformation (fileURL) {
   OrderDate:OrderDateToday,
   Amount:"",
   CourierType:"StCourier",
-  PrimaryPhoneNo:document.getElementById("phone").value,
+  PrimaryPhoneNo:0,
   mainimage:localStorage.getItem("MainURL"),
   FramedImage:"N"
 }, (error) => {

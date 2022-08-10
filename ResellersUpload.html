@@ -20,6 +20,8 @@
 				<option disabled="disabled" selected="selected">Select Product Type</option>
 				<option>Mosaic Frame</option>
 				<option>Digital Painting</option>
+                <option>Customized Frame</option>
+                <option>LED Polarids</option>
 				<option>Heart Mosaic</option>
 				<option>Text Mosaic</option>
 				<option>Oil painting</option>
@@ -43,6 +45,7 @@
 			<select class="form-control" id="framesize">
 				<option disabled="disabled" selected="selected">Select Frame Size</option>
 				<option>8x6</option>
+                <option>10x8</option>
 				<option>12x8</option>
 				<option>10x10</option>
 				<option>12x12</option>
@@ -63,9 +66,10 @@
             </div>
             <p>ADDRESS:</p>
             <div class="name-item">
-                <input type="text" name="Door No & Street/area :"  id="DoorNo" placeholder="Door No & Street/area" />
+                <textarea id = "address" rows="5"></textarea>
+                <!-- <input type="text" name="Door No & Street/area :"  id="DoorNo" placeholder="Door No & Street/area" /> -->
             </div>
-            <div class="name-item">
+            <!-- <div class="name-item">
                 <input type="text" name="Postal/Taluk"  id="Postal" placeholder="Postal/Taluk" />
             </div>
             <div class="name-item">
@@ -79,14 +83,14 @@
             </div>
             <div class="name-item">
                 <input type="text" name="Landmark"  id="Landmark" placeholder="Landmark" />
-            </div>
-            <p>CONTACT NUMBER:</p>
+            </div> -->
+            <!-- <p>CONTACT NUMBER:</p>
             <div class="name-item">
                 <input type="text" name="Primary Contact Number"  id="phone" placeholder="Primary Contact Number" />
             </div>
             <div class="name-item">
                 <input type="text" name="Alternative Contact Number"  id="Alterphone" placeholder="Alternative Contact Number" />
-            </div>
+            </div> -->
             <p>MAIN PICTURE </p>
             <div class="name-item">
                 <input type="file" id="MainPic" />
@@ -130,6 +134,7 @@
 
   <script>
       $(document).ready(function() {
+        Orderno();
 		$('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').parent().closest('a').closest('div').remove();
 	});
   var firebaseConfig = {
@@ -143,6 +148,17 @@
       measurementId: "G-JLV996E31W"
   };
   firebase.initializeApp(firebaseConfig);
+  var OrderCount;
+  function Orderno()
+{
+    
+    var ref = firebase.database().ref("OrdertoEdit");
+    ref.once("value").then(function(snapshot)
+    {
+        OrderCount=snapshot.numChildren();    
+   });
+}
+
 
   </script>
     
