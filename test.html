@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Message</title>
+</head>
+<body>
+  <div>
+<input id="number" type="numric" placeholder="phone 966506666666" >
+<input id="name" type="text" placeholder="name" >
+<input id="msg" type="text" placeholder="type msg" >
+<button onclick="send_handle()">send</button>
+    
+    <script> 
+      function send_handle(){
+
+let num=document.getElementById("number").value;
+
+let msg= document.getElementById("msg").value;
+
+  let name= document.getElementById("name").value;
+
+  let text='I *Lovestore.in* %0AYour Order-114 is Dispatched %0AFor More Updates:https://bit.ly/OrderStatusPage'
+console.log(text);
+var win = window.open(`https://wa.me/${num}?text=${text}`, '_blank');
+win.focus();
+}
+    </script>
+</body>
+</html>

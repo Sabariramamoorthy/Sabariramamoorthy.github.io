@@ -16,7 +16,10 @@
         background: linear-gradient(0deg, #fff, 50%, #ffffff);
         background-repeat: no-repeat
       }
-
+      table {
+        border-collapse: collapse;
+        width: 100%;
+    }
       .container-fluid {
         margin-top: 20px !important;
         margin-bottom: 80px !important
@@ -198,22 +201,19 @@
         margin-left: 0px;
       }   
     }
+
+   
     </style>
   </head>
   <body >
     <div style="text-align: center;margin-top: 30px;">
       <button type="button" class="btn btn-outline-primary" style="font-size: larger;font-weight: bold;">SR GIFTS AND DESIGNS</button>
     </div>
-    <div class="container-fluid my-5 d-sm-flex justify-content-center">
-      <div class="card px-2">
+    <div >
+      <div >
         <div class="card-header bg-white">
           <div class="row justify-content-between">
-            <div class="col">
-              <p class="font-weight-bold text-muted" > Hi Customer, 
-              </p>
-              <p class="text-muted"> Today <span id="date" class="font-weight-bold text-dark">12,March 2019</span>
-              </p>
-            </div>
+            
             <div class="flex-col my-auto">
               <h6 class="ml-auto mr-3">
                 <img class="align-self-center img-fluid" src="/logo.png" width="50 " height="50">
@@ -224,15 +224,21 @@
         <div class="card-body">
           <div class="media flex-column flex-sm-row">
             <div class="media-body ">
-              <p class="text-muted " id="FrameSize"> Search Your Order by Phone No:</p>
-              <input type="text" id="Searchnumber" class="btn btn-outline-primary d-flex" style="margin-top: 20px;margin-bottom: 10px;" placeholder="Enter Your Primary No"></input>
-              <button type="button" id="Satus" class="btn btn-outline-primary d-flex" onclick="searchdata()">Search</button>             
+              <p class="text-muted " id="FrameSize"> Search with Your Pincode:</p>
+              <input type="text" id="Searchnumber" class="btn btn-outline-primary d-flex" style="margin-top: 20px;margin-bottom: 10px;" placeholder="Enter Your Pincode "
+              oninvalid="this.setCustomValidity('Enter Valid Pincode')"
+              oninput="this.setCustomValidity('')"required/>
+            </input>
+              <button type="button" id="Satus" class="btn btn-outline-primary d-flex" onclick="asyncCall()">Search</button>             
               <br>
             </div>  
           </div>
           <div>
-            <p class="bold btn-outline-primary" style=" color: #4bb8a9;text-align: center;margin-bottom: 20px;">Placed Orders</p>     
-            <div id="orderTab">
+            <!-- --<p class="bold btn-outline-primary" style=" color: #4bb8a9;text-align: center;margin-bottom: 20px;">Placed Orders</p>      -->
+            <div>
+                <table  id="TableTab" class="table table-bordered" style="font-size: smaller;">
+
+                </table>
               <!-- <a href="Tracking.html?OrderNo=20222710"><p class="order">Abarna - Spotify Frame without lyrical</p></a>  -->
             </div>
           </div>
@@ -250,92 +256,59 @@
         </div>
       </div>
     </div>
-<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.0.7/compressor.js" integrity="sha512-507fGdRv/mYPji0WAaq0d5Jvmo8CzqvPEmv3H6dSb+q0Rc2RaauF5jr37Vcx+lVT/8XAU5vff3HxfqNlwtqYhg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
-  <script>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script> 
+<script>
+
 $(document).ready(function() {
   $('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').parent().closest('a').closest('div').remove();
-  getDownloaD ();  
 });
 
-var firebaseConfig = {
-    apiKey: "AIzaSyAJBdhYlg5xFu1MQOzPQjaiWyheBOHMAN0",
-    authDomain: "srgifts-4cccb.firebaseapp.com",
-    databaseURL: "https://srgifts-4cccb-default-rtdb.asia-southeast1.firebasedatabase.app",
-    projectId: "srgifts-4cccb",
-    storageBucket: "srgifts-4cccb.appspot.com",
-    messagingSenderId: "662372730784",
-    appId: "1:662372730784:web:f9c8ffc3a7e48f7ea0c6c5",
-    measurementId: "G-JLV996E31W"
+       	
+  async function asyncCall()  {
+    document.getElementById('Searchnumber').validity.valid
+    var Pincode=document.getElementById("Searchnumber").value;
+    document.getElementById("TableTab").innerHTML = "";
+    var details = {
+    'key': 'YSVPERfvjETd8jyahfjqV3ji1mSrGI0c',
+    'pin': Pincode,
+    'appid': 1
 };
 
-firebase.initializeApp(firebaseConfig);
-
-var list=[];
-var NoOrder="Y";
-function getDownloaD (){ 
-  const d=new Date()
-  const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  var OrderDateToday=d.getDate()+", "+months[d.getMonth()] +" "+d.getFullYear();
-  document.getElementById("date").innerText =OrderDateToday;
- 
-   //console.log(OrderNo); 
-
-  
-
-   firebase.database().ref('OrdertoEdit').once('value', function(AllRecords) {
-			AllRecords.forEach(function(CurrenRecord) {
-				var orderno = (String(CurrenRecord.val().OrderNo).split("-"))[1]
-				var page = CurrenRecord.val().Pagename;
-				var productName = CurrenRecord.val().ProductName;
-				var Framesize = CurrenRecord.val().framesize;
-        var PrimaryNo = CurrenRecord.val().PrimaryPhoneNo;
-				var Address = (String(CurrenRecord.val().address).split("\n"))[0];
-				list.push({
-					OrderNo: orderno,
-					ProductName: productName,
-					framesize: Framesize,
-					address: Address,
-					Pagename: page,
-					PrimaryPhoneNo: PrimaryNo		
-				})
-			});
-			//console.log(list);
-		});
+var formBody = [];
+for (var property in details) {
+  var encodedKey = encodeURIComponent(property);
+  var encodedValue = encodeURIComponent(details[property]);
+  formBody.push(encodedKey + "=" + encodedValue);
 }
+formBody = formBody.join("&");
 
-function searchdata() {
-  
-  var PrimaryPhoneNo=document.getElementById("Searchnumber").value;
-  //console.log(PrimaryPhoneNo);
-		list.forEach((element, index, array) => {
-      //console.log(String(list[index].PrimaryPhoneNo));
-				if(String(list[index].PrimaryPhoneNo) == PrimaryPhoneNo) 
-        {				
-        NoOrder="N"	;
-        //console.log(list[index])
-        writeHTMLasJS(list[index].OrderNo,String(list[index].address)+"-"+String(list[index].ProductName));
-        }
-			})
-  if (NoOrder=="Y")
+  const response = await fetch('http://stcourier.com/stnew/data.php', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+    },
+    body: formBody
+  });
+  const myJson = await response.text(); //extract JSON from the http response
+  // do something with myJson
+  console.log(myJson)
+  console.log((myJson.toString()).indexOf("There</td>"))
+
+  if ((myJson.toString()).indexOf("There</td>") == 419)
   {
-var code = "";
-code += "  <a><p class=\"noorder\">No Order Available for the Phone Number.</p></a>";
-code += "  <a><p class=\"noorder\">For Further info Contact us</p></a>";
-
-document.getElementById("orderTab").innerHTML = code;
+    window.location.href = `https://www.dtdc.in/covid_pincodes.asp?orgpincode=608001&destpincode=${Pincode}`;
+   // document.getElementById("TableTab").innerHTML += "no service available";
   }
-           	
-	}
-  function writeHTMLasJS(orderno,name){   
-var code = "";
-code += "  <a href = \"Tracking.html?OrderNo="+orderno+"\" ><p class=\"order\"> <u>"+name+" </u></p></a>";
-document.getElementById("orderTab").innerHTML += code;
+  else
+  {
+    document.getElementById("TableTab").innerHTML += myJson;
+  }
+  
+  
 }
-    </script>
+  
+
+
+  </script>
   </body>
 </html>

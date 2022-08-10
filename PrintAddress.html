@@ -1,0 +1,238 @@
+<html>
+<head>
+<title>PrintAddress</title>  
+<link rel="shortcut icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">  
+</head>
+<style>
+
+@page {
+    size: 10in 9.25in;
+    margin: 2cm;
+}
+@media print {
+    body{
+        width: 10in;
+        height: 9.25in;
+        /* change the margins as you want them to be. */
+   } 
+}
+body{
+  font-family: 'Staatliches', cursive;
+}
+.address{
+        width: 100% ;
+        height: 9.25in;
+        border: 3px solid rgb(5, 5, 5);
+        border-radius: 20px;
+        align-items: center;
+        /* change the margins as you want them to be. */
+   } 
+ 
+h1 {
+  page-break-before: always;
+}
+.line{
+    background-color:black ;
+    width:100% ;
+    height:3px;
+
+}
+hr{
+    border: 2px solid rgb(5, 5, 5);
+}
+
+.image{
+    object-fit:contain;
+}
+.leftimage{
+    float: left;
+    object-fit:contain;
+    width: 200px;
+    height: 250px;
+    margin-right:2cm ;
+    border-right: 3px solid black;
+}
+.Rimage{
+    float: right;
+    object-fit:contain;
+    width: 200px;
+    height: 250px;
+    margin-right:2cm ;
+    border-left: 3px solid black;
+
+}
+.R1image{
+    float: right;
+    object-fit:cover;
+    width: 40%;
+    height:30%;
+    margin-top: 1cm;
+    margin-right:0.5cm ;
+
+}
+.vl {
+    background-color:black ;
+    width:3px ;
+    height: 200px;
+
+
+}
+
+</style>
+<body> 
+<div id="js_html"></div>
+
+<!-- <div class="address">
+<p style="white-space: pre-line;font-size: xx-large;margin-left: 3px; border-bottom: 3px solid black;"><img src="download copy.png" class="leftimage"><img src="download.jpg" class="Rimage"><strong style="font-size:xx-large;">FROM ADDRESS:</strong> 
+    SR CREATION
+    94/33,South Car Street
+    Chidambaram-608001
+    9514309668</p>
+<p style="white-space: pre-line;font-size: 40px; margin-left: 30px;"><strong style="font-size:xx-large;">TO ADDRESS:</strong>
+    Priyadharsini
+    11/27, East Street,
+    Koothaippar, Thiruverumbur
+    Trichy - 620013
+    9629593645
+    7339127722
+</p>
+<hr>
+<p style="text-align: center;font-size: xx-large;">Sanitize your parcel before opening</p>
+<hr>
+<p style="text-align: center;font-size: x-large;">Thank you for your order!. For more products and offers visit our instagram page <strong>SR Gifts and Designs</strong> </p>
+</div>
+<h1></h1>
+<div class="address">
+    <p style="white-space: pre-line;font-size: xx-large;margin-left: 3px; border-bottom: 3px solid black;"><img src="download copy.png" class="leftimage"><img src="download.jpg" class="Rimage"><strong style="font-size:xx-large;">FROM ADDRESS:</strong> 
+        LOVESTORE.IN
+        94/33,South Car Street
+        Chidambaram-608001
+        8089091319</p>
+    <p style="white-space: pre-line;font-size: 40px; margin-left: 30px;"><strong style="font-size:xx-large;">TO ADDRESS:</strong>
+        Senthilkumar B
+Sri Jayaguru mobile, Vignesh complex
+Sankarankovil muku,RAJAPALAYAM-626117
+near water tank
+8754067472
+6380342026
+    </p>
+    <hr>
+    <p style="text-align: center;font-size: xx-large;">Sanitize your parcel before opening</p>
+    <hr>
+    <p style="text-align: center;font-size: x-large;">Thank you for your order!. For more products and offers visit our instagram page <strong>Lovestore.in</strong> </p>
+    </div> -->
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script> 
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+<script id="MainScript">
+
+$(document).ready(function() {
+  $('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').parent().closest('a').closest('div').remove();
+});
+    // var firebaseConfig = {
+    //     apiKey: "AIzaSyC5slKVKE4z13mKZQynHi8hwBlhK8xy1SU",
+    //     authDomain: "sound-dahlia-290617.firebaseapp.com",
+    //     databaseURL: "https://sound-dahlia-290617-default-rtdb.firebaseio.com/",
+    //     projectId: "sound-dahlia-290617",
+    //     storageBucket: "sound-dahlia-290617.appspot.com",
+    //     messagingSenderId: "333674478909",
+    //     appId: "1:333674478909:web:a22289e066221ef1935954"
+    // };
+    var firebaseConfig = {
+    apiKey: "AIzaSyAJBdhYlg5xFu1MQOzPQjaiWyheBOHMAN0",
+    authDomain: "srgifts-4cccb.firebaseapp.com",
+    databaseURL: "https://srgifts-4cccb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "srgifts-4cccb",
+    storageBucket: "srgifts-4cccb.appspot.com",
+    messagingSenderId: "662372730784",
+    appId: "1:662372730784:web:f9c8ffc3a7e48f7ea0c6c5",
+    measurementId: "G-JLV996E31W"
+};
+    firebase.initializeApp(firebaseConfig);
+    
+    var list = [];
+    var Fromaddress = {};
+    //#region address
+    var street ="94/33,South Car Street"+"\n"+"Chidambaram-608001";
+    Fromaddress["Lovestore"] = "Lovestore"+"\n"+street+"\n"+"8089091319";
+    Fromaddress["SRCreation"] = "SRCreation"+"\n"+street+"\n"+"9514309668";
+    Fromaddress["Giftspot"] = "Giftspot"+"\n"+street+"\n"+"8668139196";
+    Fromaddress["TrendingGiftZone"] = "TrendingGiftZone"+"\n"+street+"\n"+"9150486488";
+    Fromaddress["OnlineShoppingCart"] = "OnlineShoppingCart"+"\n"+street+"\n"+"9080567902";
+//#endregion
+    function SelectallData(){
+        firebase.database().ref('OrdertoEdit').once('value',
+        function(AllRecords)
+        {
+
+           AllRecords.forEach(
+               function (CurrenRecord)
+               {                                  
+            var orderno = CurrenRecord.val().OrderNo;
+            var page = CurrenRecord.val().Pagename;
+            var status = CurrenRecord.val().Status;
+            var Address = CurrenRecord.val().address; 
+            
+            list.push({
+              OrderNo: orderno,
+              address: Address,
+              Pagename: page,
+              Status:status,
+              
+            })             
+               }
+           );
+           createElement();
+        });
+      
+    }
+
+    window.onload=SelectallData;
+
+
+
+    function createElement(){
+        list.forEach((element, index, array) => { 
+        if (list[index].Status == "Framing Started") {   
+            var Address=String(list[index].address);
+            Address=Address.replace('\n\n', '\n');
+            Address=Address.replace('\n\n', '\n');
+            Address=Address.replace('\n\n', '\n');
+            Address=Address.replace('\n\n', '\n');  
+            let start =Address.indexOf("From Address") 
+            var mystr = (Address).slice(start,Address.length);
+            Address=Address.replace(mystr, ''); 
+            Additemstotable(list[index].OrderNo);       
+            document.getElementById("fromaddrees"+list[index].OrderNo).innerHTML+= "<img src=\"download.jpg\" class=\"Rimage\"><strong style=\"font-size:xx-large;\">FROM ADDRESS:</strong><br>"+Fromaddress[list[index].Pagename];
+            document.getElementById("toaddrees"+list[index].OrderNo).innerHTML="<img src=\"handle.jpg\" class=\"R1image\"><strong style=\"font-size:xx-large;\">TO ADDRESS:</strong><br>"+Address;
+            document.getElementById("pagename"+list[index].OrderNo).innerText=list[index].Pagename;
+          }
+        } )
+    }
+
+    function Additemstotable(orderno)
+    {  
+	var code = "";
+	code += "<div class=\"address\">";
+	code += "<p id=\"fromaddrees"+orderno+"\" style=\"white-space: pre-line;font-size: xx-large;margin-left: 3px;\"><img src=\"download copy.png\" class=\"leftimage\"></p>";
+	code += "<hr>";
+    code += "<p id=\"toaddrees"+orderno+"\"  style=\"white-space: pre-line;font-size: 35px; margin-left: 3px;\"><strong style=\"font-size:xx-large;\">TO ADDRESS:</strong></p>";
+	code += "<hr>";
+	code += "<p style=\"text-align: center;font-size: xx-large;\">Sanitize your parcel before opening</p>";
+	code += "<hr>";
+	code += "<p style=\"text-align: center;font-size: x-large;\">Thanks you for your order!. For more products and offers visit our instagram page <strong id=\"pagename"+orderno+"\"></strong> </p>";
+	code += "</div>";
+	code += "<h1></h1>";
+	document.getElementById("js_html").innerHTML += code;
+    }
+
+</script>
+</body>
+
+</html>

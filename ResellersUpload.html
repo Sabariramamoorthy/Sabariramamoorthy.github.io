@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Upload Your Orders</title>
+    <link rel="shortcut icon" href="/logo.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="Uploadtoedit.css"> 
+  </head>
+  <img src="upload.gif" alt="Paris" id="gif" width="500px" height="500px" class="center">
+  <body>
+    <div id="divid" class="testbox">
+      <form id="formid">  
+        <div class="banner">
+        </div>
+        <div class="item">
+            <p for="Product Name">PRODUCT NAME:</p>
+			<select class="name-item" id="ProductName">
+				<option disabled="disabled" selected="selected">Select Product Type</option>
+				<option>Mosaic Frame</option>
+				<option>Digital Painting</option>
+				<option>Heart Mosaic</option>
+				<option>Text Mosaic</option>
+				<option>Oil painting</option>
+				<option>Crescent Moon</option>
+				<option>Text Mosaic</option>
+				<option>Alphabet Frame</option>
+				<option>Comic Caricature</option>
+				<option>Instagram Frame</option>
+				<option>Baby Biodata</option>
+				<option>Spotify Frame with lyrical</option>
+				<option>Spotify Frame without lyrical</option>
+				<option>Name and Numerical Frame</option>
+				<option>Love Haert Mosaic Frame</option>
+				<option> Heart Collage with Shiloute</option>
+				<option>Heart in Heart Frame</option>
+				<option>Skymap Frame</option>
+				<option>Other</option>
+			</select>
+            <input id="others" style="visibility: hidden;display: none;" type="text" name="name" placeholder="You Choosen Others-Please mention here in details" />
+			<p for="Frame Size" class="name-item">FRAME SIZE:(in Inch)</p>
+			<select class="form-control" id="framesize">
+				<option disabled="disabled" selected="selected">Select Frame Size</option>
+				<option>8x6</option>
+				<option>12x8</option>
+				<option>10x10</option>
+				<option>12x12</option>
+				<option>12x15</option>
+				<option>12x18</option>
+				<option>20x16</option>
+				<option>16x16</option>
+				<option>24x18</option>
+				<option>18x18</option>
+				<option>20x30</option>
+                <option>Other</option>
+			</select>
+            <input id="otherssize" style="visibility: hidden;display: none;" type="text" name="name" placeholder="You Choosen Others-Please give the size" />
+			<br/>
+            <p>NAME:</p>
+            <div class="name-item">
+            <input type="text" name="Customer Name"  id="Name" placeholder="Customer Name" />
+            </div>
+            <p>ADDRESS:</p>
+            <div class="name-item">
+                <input type="text" name="Door No & Street/area :"  id="DoorNo" placeholder="Door No & Street/area" />
+            </div>
+            <div class="name-item">
+                <input type="text" name="Postal/Taluk"  id="Postal" placeholder="Postal/Taluk" />
+            </div>
+            <div class="name-item">
+                <input type="text" name="City/District"  id="District" placeholder="City/District" />
+            </div>
+            <div class="name-item">
+                <input type="text" name="State"  id="State" placeholder="State" />
+            </div>
+            <div class="name-item">
+                <input type="text" name="Pincode"  id="Pincode" placeholder="Pincode" />
+            </div>
+            <div class="name-item">
+                <input type="text" name="Landmark"  id="Landmark" placeholder="Landmark" />
+            </div>
+            <p>CONTACT NUMBER:</p>
+            <div class="name-item">
+                <input type="text" name="Primary Contact Number"  id="phone" placeholder="Primary Contact Number" />
+            </div>
+            <div class="name-item">
+                <input type="text" name="Alternative Contact Number"  id="Alterphone" placeholder="Alternative Contact Number" />
+            </div>
+            <p>MAIN PICTURE </p>
+            <div class="name-item">
+                <input type="file" id="MainPic" />
+            </div>
+            <p>REFERENCE PICTURE</p>
+            <div class="name-item">
+                <input type="file" id="RefPic" />
+            </div>
+            <p>OTHER PICTURES</p>
+            <div class="name-item">
+                <input type="file" id="otherPic" multiple/>
+            </div>
+        </div>
+
+         <div class="item">
+            <p>TEXTS/QUOTES</p>
+            <textarea id = "text" rows="3"></textarea>
+          <p>ADDITIONAL INSTRUCTIONS</p>
+          <textarea id = "info" rows="3"></textarea>
+         </div>
+         <div class="btn-block">
+          <a id="notify" style="color: red;"></a>  
+          <br> 
+          <button id="up" type="button" onclick="uploadZip()" style="background-color: red;" disabled>Upload</button>
+          <p  id="uploading"></p>
+          <br>
+          <progress value="0" max="100" id="progress"></progress>
+        </div>
+      </form>
+    </div>
+    <script src="/ResellerUploadtoedit.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.6.0/jszip.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.0.7/compressor.js" integrity="sha512-507fGdRv/mYPji0WAaq0d5Jvmo8CzqvPEmv3H6dSb+q0Rc2RaauF5jr37Vcx+lVT/8XAU5vff3HxfqNlwtqYhg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+      $(document).ready(function() {
+		$('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').parent().closest('a').closest('div').remove();
+	});
+  var firebaseConfig = {
+      apiKey: "AIzaSyAJBdhYlg5xFu1MQOzPQjaiWyheBOHMAN0",
+      authDomain: "srgifts-4cccb.firebaseapp.com",
+      databaseURL: "https://srgifts-4cccb-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "srgifts-4cccb",
+      storageBucket: "srgifts-4cccb.appspot.com",
+      messagingSenderId: "662372730784",
+      appId: "1:662372730784:web:f9c8ffc3a7e48f7ea0c6c5",
+      measurementId: "G-JLV996E31W"
+  };
+  firebase.initializeApp(firebaseConfig);
+
+  </script>
+    
+  </body>
+</html>

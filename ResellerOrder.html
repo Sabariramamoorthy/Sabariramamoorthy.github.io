@@ -209,7 +209,7 @@
         <div class="card-header bg-white">
           <div class="row justify-content-between">
             <div class="col">
-              <p class="font-weight-bold text-muted" > Hi Customer, 
+              <p id="reseller"class="font-weight-bold text-muted" > Hi Customer, 
               </p>
               <p class="text-muted"> Today <span id="date" class="font-weight-bold text-dark">12,March 2019</span>
               </p>
@@ -222,19 +222,22 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="media flex-column flex-sm-row">
+          <!-- <div class="media flex-column flex-sm-row">
             <div class="media-body ">
               <p class="text-muted " id="FrameSize"> Search Your Order by Phone No:</p>
               <input type="text" id="Searchnumber" class="btn btn-outline-primary d-flex" style="margin-top: 20px;margin-bottom: 10px;" placeholder="Enter Your Primary No"></input>
               <button type="button" id="Satus" class="btn btn-outline-primary d-flex" onclick="searchdata()">Search</button>             
               <br>
             </div>  
-          </div>
+          </div> -->
           <div>
-            <p class="bold btn-outline-primary" style=" color: #4bb8a9;text-align: center;margin-bottom: 20px;">Placed Orders</p>     
+            <p class="bold btn-outline-primary" style=" color: #4bb8a9;text-align: center;margin-bottom: 20px;">Dispatched Order</p>     
             <div id="orderTab">
               <!-- <a href="Tracking.html?OrderNo=20222710"><p class="order">Abarna - Spotify Frame without lyrical</p></a>  -->
             </div>
+            <br>
+          <a id="allorder" href="LegacyReseller.html?OrderNo=20222710"><p class="order btn-outline-primary">All Orders</p></a> 
+          
           </div>
         </div>
         <br>
@@ -274,7 +277,10 @@ var firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+var PageNameIn = urlParams.get('Name');
+document.getElementById("reseller").innerText ="Hi "+PageNameIn+",";
 var list=[];
 var NoOrder="Y";
 function getDownloaD (){ 
@@ -282,7 +288,7 @@ function getDownloaD (){
   const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
   var OrderDateToday=d.getDate()+", "+months[d.getMonth()] +" "+d.getFullYear();
   document.getElementById("date").innerText =OrderDateToday;
- 
+  document.getElementById("allorder").href ="LegacyReseller.html?Name="+PageNameIn;
    //console.log(OrderNo); 
 
   
@@ -293,7 +299,7 @@ function getDownloaD (){
 				var page = CurrenRecord.val().Pagename;
 				var productName = CurrenRecord.val().ProductName;
 				var Framesize = CurrenRecord.val().framesize;
-        var PrimaryNo = CurrenRecord.val().PrimaryPhoneNo;
+        var status = CurrenRecord.val().Status;
 				var Address = (String(CurrenRecord.val().address).split("\n"))[0];
 				list.push({
 					OrderNo: orderno,
@@ -301,20 +307,22 @@ function getDownloaD (){
 					framesize: Framesize,
 					address: Address,
 					Pagename: page,
-					PrimaryPhoneNo: PrimaryNo		
+					Status: status		
 				})
 			});
 			//console.log(list);
+      searchdata();
 		});
 }
 
 function searchdata() {
   
-  var PrimaryPhoneNo=document.getElementById("Searchnumber").value;
+  //Framing Started
   //console.log(PrimaryPhoneNo);
+  
 		list.forEach((element, index, array) => {
       //console.log(String(list[index].PrimaryPhoneNo));
-				if(String(list[index].PrimaryPhoneNo) == PrimaryPhoneNo) 
+				if(String(list[index].Pagename) == PageNameIn && (String(list[index].Status) == "Order Dispatched" || String(list[index].Status) == "Order Dispatched") ) 
         {				
         NoOrder="N"	;
         //console.log(list[index])
@@ -324,8 +332,7 @@ function searchdata() {
   if (NoOrder=="Y")
   {
 var code = "";
-code += "  <a><p class=\"noorder\">No Order Available for the Phone Number.</p></a>";
-code += "  <a><p class=\"noorder\">For Further info Contact us</p></a>";
+code += "  <a><p class=\"noorder\">No Order Dispatched recently .</p></a>";
 
 document.getElementById("orderTab").innerHTML = code;
   }

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+    <title>ALTER DATA</title>  
+ <link rel="shortcut icon" href="logo.png">   
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="shortcut icon" href="logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+<style> 
+  body{
+    font-family: 'Staatliches', cursive;
+  }
+    img {
+        width:100%;
+          height: 100%;
+          object-fit: cover;
+          border: 5px solid #ffff;
+        }
+  *{
+    box-sizing: border-box;
+  }
+  .w3padding-16{
+    padding: 5px;
+  }
+  .column {
+    float: left;
+    width: 33.33%;
+    padding: 5px;
+    height:300px ;
+  }
+  ::placeholder {
+  color: rgb(255, 255, 255);
+}
+  
+  /* Clearfix (clear floats) */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+    
+  }
+  .pop{
+    height: 30px;
+  }
+  .pop:hover{
+    height:auto;
+  }
+  a{
+    font-size: large;
+  }
+  .left{
+    width: 50%;
+    margin-left: 20%;
+    background-color: rgb(8, 17, 17);
+    color: whitesmoke;
+  }
+  .left:hover{
+    background-color: rgb(2, 46, 102);
+  }
+
+  .center{
+    font-family: 'Staatliches', cursive;
+  }
+
+  </style>
+</head>
+<body >
+  <br>
+  <div class="center">
+      <input type="text" class="left" id="orderNo" placeholder="Select Order Number"></input>
+      <br>
+      <br> 
+  <select id="OrderStatus" class="left">
+    <option disabled="disabled" selected="selected">Select your param</option>
+    <option>OrderNo</option>
+    <option>ProductName</option>
+    <option>framesize</option>
+    <option>address</option>
+    <option>Pagename</option>
+    <option>text</option>
+    <option>info</option>
+    <option>Fileurl</option>
+    <option>makeDispatch</option>
+    <option>Status</option>
+    <option>TrackingId</option>
+    <option>editedImage</option>
+    <option>mainimage</option>
+    <option>FramedImage</option>
+    <option>OrderDate</option>
+    <option>Amount</option>
+    <option>CourierType</option>
+
+  </select>
+  <br>
+  <br>
+  <a class="left">Enter VAlue to Update</a>
+  <br>
+  <textarea id="Tracking" name="addresspaste" rows=10 cols=60 style="margin-left: 20%;"> </textarea>
+  <br>
+  <br>
+  <input type="button" class="left" value="Update" onclick="writeNewPost()">
+</div>
+<br>
+
+ 
+ <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.0.7/compressor.js" integrity="sha512-507fGdRv/mYPji0WAaq0d5Jvmo8CzqvPEmv3H6dSb+q0Rc2RaauF5jr37Vcx+lVT/8XAU5vff3HxfqNlwtqYhg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
+  <script>
+$(document).ready(function() {
+  $('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').parent().closest('a').closest('div').remove();
+
+  
+});
+
+var firebaseConfig = {
+    apiKey: "AIzaSyAJBdhYlg5xFu1MQOzPQjaiWyheBOHMAN0",
+    authDomain: "srgifts-4cccb.firebaseapp.com",
+    databaseURL: "https://srgifts-4cccb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "srgifts-4cccb",
+    storageBucket: "srgifts-4cccb.appspot.com",
+    messagingSenderId: "662372730784",
+    appId: "1:662372730784:web:f9c8ffc3a7e48f7ea0c6c5",
+    measurementId: "G-JLV996E31W"
+};
+
+firebase.initializeApp(firebaseConfig);
+function writeNewPost() {
+   var OrderNo=document.getElementById("orderNo").value;
+   var param=document.getElementById("OrderStatus").value;
+   var value=document.getElementById("Tracking").value;
+   var updates = {};
+   updates['/OrdertoEdit/'+OrderNo+'/'+param] = value
+   firebase.database().ref().update(updates, (error) => {
+   if (error) { 
+   } 
+   else {
+      alert("updated Sucessfully")
+   }
+ } );
+}
+
+</script>
+</body>
+</html>

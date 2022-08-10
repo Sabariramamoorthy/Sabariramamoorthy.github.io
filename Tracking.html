@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+  <title>TRACK MY ORDER </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="logo.png">
+   
+    <style>
+      body {
+        letter-spacing: 0.8px;
+        background: linear-gradient(0deg, #fff, 50%, #ffffff);
+        background-repeat: no-repeat
+      }
+
+      .container-fluid {
+        margin-top: 20px !important;
+        margin-bottom: 80px !important
+      }
+
+      p {
+        font-size: 14px;
+        margin-bottom: 7px
+      }
+
+      .cursor-pointer {
+        cursor: pointer
+      }
+
+      a {
+        text-decoration: none !important;
+        color: #651FFF !important
+      }
+
+      .bold {
+        font-weight: 600
+      }
+
+      .small {
+        font-size: 12px !important;
+        letter-spacing: 0.5px !important
+      }
+
+      .Today {
+        color: rgb(83, 83, 83)
+      }
+
+      .btn-outline-primary {
+        background-color: #fff !important;
+        color: #4bb8a9 !important;
+        border: 1.3px solid #4bb8a9;
+        font-size: 12px;
+        border-radius: 0.4em !important
+      }
+
+      .btn-outline-primary:hover {
+        background-color: #4bb8a9 !important;
+        color: #fff !important;
+        border: 1.3px solid #4bb8a9
+      }
+
+      .btn-outline-primary:focus,
+      .btn-outline-primary:active {
+        outline: none !important;
+        box-shadow: none !important;
+        border-color: #42A5F5 !important
+      }
+
+      #progressbar {
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: #455A64;
+        padding-left: 0px;
+        margin-top: 30px
+      }
+
+      #progressbar li {
+        list-style-type: none;
+        font-size: 13px;
+        width: 33.33%;
+        float: left;
+        position: relative;
+        font-weight: 400;
+        color: #455A64 !important
+      }
+
+      #progressbar #step1:before {
+        content: "1";
+        color: #fff;
+        width: 29px;
+        margin-left: 15px !important;
+        padding-left: 11px !important
+      }
+
+      #progressbar #step2:before {
+        content: "2";
+        color: #fff;
+        width: 29px
+      }
+
+      #progressbar #step3:before {
+        content: "3";
+        color: #fff;
+        width: 29px;
+        margin-right: 15px !important;
+        padding-right: 11px !important
+      }
+
+      #progressbar li:before {
+        line-height: 29px;
+        display: block;
+        font-size: 12px;
+        background: #455A64;
+        border-radius: 50%;
+        margin: auto
+      }
+
+      #progressbar li:after {
+        content: '';
+        width: 121%;
+        height: 2px;
+        background: #455A64;
+        position: absolute;
+        left: 0%;
+        right: 0%;
+        top: 15px;
+        z-index: -1
+      }
+
+      #progressbar li:nth-child(2):after {
+        left: 50%
+      }
+
+      #progressbar li:nth-child(1):after {
+        left: 25%;
+        width: 121%
+      }
+
+      #progressbar li:nth-child(3):after {
+        left: 25% !important;
+        width: 50% !important
+      }
+
+      #progressbar li.active:before,
+      #progressbar li.active:after {
+        background: #4bb8a9
+      }
+
+      .card {
+        background-color: #fff;
+        box-shadow: 2px 4px 15px 0px rgb(0, 108, 170);
+        z-index: 0
+      }
+
+      small {
+        font-size: 12px !important
+      }
+      a:link {
+  color: rgb(3, 79, 122);
+  background-color: transparent;
+  text-decoration: none;
+}
+      .a {
+        justify-content: space-between !important
+      }
+
+      .border-line {
+        border-right: 1px solid rgb(226, 206, 226)
+      }
+
+      .card-footer img {
+        opacity: 0.3
+      }
+
+      .card-footer h5 {
+        font-size: 1.1em;
+        color: #8C9EFF;
+        cursor: pointer
+      }
+      .prodcutImage{
+        border: 5.5px solid rgb(0, 0, 0); 
+        margin-left: 25px;      
+      }
+      @media only screen and (max-width: 600px) {
+        .prodcutImage{
+        border: 2.5px solid rgb(0, 0, 0);
+        margin-left: 0px;
+      }   
+    }
+    </style>
+  </head>
+  <body>
+    <div style="text-align: center;margin-top: 30px;">
+      <button type="button" class="btn btn-outline-primary" style="font-size: larger;font-weight: bold;">SR GIFTS AND DESIGNS</button>
+    </div>
+    <div id="body" style="visibility: hidden;" class="container-fluid my-5 d-sm-flex justify-content-center">
+      <div class="card px-2">
+        <div class="card-header bg-white">
+          <div class="row justify-content-between">
+            <div class="col">
+              <p class="text-muted"> Order ID <span  id="OrderId" class="font-weight-bold text-dark" >1222528743</span>
+              </p>
+              <p class="text-muted"> Place On <span id="Orderdate" class="font-weight-bold text-dark">12,March 2019</span>
+              </p>
+            </div>
+            <div class="flex-col my-auto">
+              <h6 class="ml-auto mr-3">
+                <img class="align-self-center img-fluid" src="/logo.png" width="50 " height="50">
+              </h6>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="media flex-column flex-sm-row">
+            <div class="media-body ">
+              <h5 class="bold" id= "ProductName">Blade High Heels Sandals</h5>
+              <p class="text-muted" id="FrameSize"> 12x18 inches</p>
+              <h4 class="mt-3 mb-4 bold">
+                <span id="amount" class="mt-5"> </span> <span  id = "paymentMode" class="small text-muted"> via (COD) </span>
+              </h4>
+              <p class="bold" style=" color: #4bb8a9;">Shipping Address: <br> <span id="Address" class="Today">11:30pm, Today</span>
+              </p>
+              <br>
+              <p class="text-muted">Tracking Status on: <span id="time" class="Today"></span>
+              </p>
+              <button type="button" id="Satus" class="btn btn-outline-primary d-flex">Reached Hub, Delhi</button>
+              <br>
+              <p class="text-muted">Tracking Id: <span id="trackingid" class="Today">11:30pm, Today</span>
+              </p>
+              <br>
+            </div>
+            <img class="align-self-center img-fluid prodcutImage" id="ProductImage" src="/FrameMockup.jpg" width="180 " height="180" >
+          </div>
+        </div>
+        <div class="row px-3">
+          <div class="col">
+            <ul id="progressbar">
+              <li class="step0 active " id="step1">PLACED</li>
+              <li class="step0 active text-center" id="step2">SHIPPED</li>
+              <li class="step0 text-muted text-right" id="step3">DELIVERED</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card-footer bg-white px-sm-3 pt-sm-4 px-0">
+          <div class="row text-center ">
+            <div class="col my-auto border-line " >
+              <a   href="https://instagram.com/sr_gifts_designs">Instagram</a>
+            </div>
+            <div class="col my-auto border-line ">
+              <a href="https://wa.me/message/J64HACHPHLHDC1">Whatsapp</a>
+            </div>
+            <div class="col my-auto  ">
+              <a href="" id ="turl">Tracking</a>
+            </div>
+            <!-- <div class="col my-auto mx-0 px-0 ">
+              <img class="img-fluid cursor-pointer" src="/logo.png" width="50" height="50">
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/compressorjs/1.0.7/compressor.js" integrity="sha512-507fGdRv/mYPji0WAaq0d5Jvmo8CzqvPEmv3H6dSb+q0Rc2RaauF5jr37Vcx+lVT/8XAU5vff3HxfqNlwtqYhg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
+	<script src ="Tracking.js"></script>
+  <script>
+$(document).ready(function() {
+  $('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').parent().closest('a').closest('div').remove();
+    $(".disclaimer").hide();
+  getDownloaD ();  
+});
+
+var firebaseConfig = {
+    apiKey: "AIzaSyAJBdhYlg5xFu1MQOzPQjaiWyheBOHMAN0",
+    authDomain: "srgifts-4cccb.firebaseapp.com",
+    databaseURL: "https://srgifts-4cccb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "srgifts-4cccb",
+    storageBucket: "srgifts-4cccb.appspot.com",
+    messagingSenderId: "662372730784",
+    appId: "1:662372730784:web:f9c8ffc3a7e48f7ea0c6c5",
+    measurementId: "G-JLV996E31W"
+};
+
+firebase.initializeApp(firebaseConfig);
+const d = new Date();
+      //>= 12 ? 'pm' : 'am'
+document.getElementById("time").innerText=d.getHours()+":"+d.getMinutes()+",Today";
+    </script>
+  </body>
+</html>

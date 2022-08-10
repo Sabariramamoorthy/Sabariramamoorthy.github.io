@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+<head>
+ <style>
+     body{
+        background-color:#EAD7C7 ;
+        font-family: 'Roboto Slab', serif;
+     }
+     .centre{
+         text-align: center;
+         align-items: center;
+     }
+     input[type=text], select {
+  width: 30%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid #157575;
+  border-radius: 20px;
+  background-color:#EAD7C7 ;
+  color: #157575;
+  font-family: 'Roboto Slab', serif;
+}
+input[type=button], select {
+  width: 10%;
+  padding: 12px ;
+  background-color: darkcyan;
+  display: inline-block;
+  border: 1px solid #ccc;
+  color: aliceblue;
+  border-radius: 20px;
+  box-sizing: border-box;
+  font-family: 'Roboto Slab', serif;
+}
+input.pw {
+  -webkit-text-security: disc;
+}
+input[type=text]:hover{
+    border: 2px solid #157575;
+  border-radius: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+    input[type=text] {
+        width: 70%;
+  }
+  input[type=button] {
+    width: 30%;
+      }
+}
+ </style>   
+</head>
+<body>
+    <div class="centre">
+        <br>
+        <br>
+        <h2>ADMIN LOGIN</h2> 
+        <input type="text"  id="Username" placeholder="Enter Username">
+        <br>  
+        <input type="text" id="Password" class="pw" placeholder="Enter Password">       
+        <br>
+        <input type="button" value="Login" onclick="submit()">
+        <br>
+        <a id="error" style="color: brown;font-size: small;"></a>
+        
+      </div>
+     
+   
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"> </script>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.13.1/firebase-storage.js"></script>
+  <script src ="js/common.js"></script>
+  <script>
+
+ $(document).ready(function() {
+   $('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').parent().closest('a').closest('div').remove();
+   $(".disclaimer").hide();
+   localStorage.clear();
+ });
+
+ firebase.initializeApp(firebaseConfig);
+ 
+   
+function submit(){
+        var Username=document.getElementById("Username").value;
+        var Password=document.getElementById("Password").value;
+
+        if (Username=="Sr" && Password =="1998" || Username=="Rocky" && Password =="1997")
+        {
+            setparam();
+            localStorage.setItem("Username", Username);
+            getDetails();
+            document.getElementById("Username").value=""
+            document.getElementById("Password").value=""
+        }
+        else{
+            document.getElementById("Username").value=""
+            document.getElementById("Password").value=""
+            document.getElementById("error").innerText="Check Your Username/Password"
+        }
+      
+    }
+
+function setparam(){
+    var date = new Date();
+    
+    var today = date.getDate();
+        var encrypted = CryptoJS.AES.encrypt("True"+today, "myPassword");
+        //console.log(today);
+        setGetParameter("paramName",encrypted );
+}
+
+function setGetParameter(paramName, paramValue)
+    {
+    var url = "admin.html";
+    var hash = location.hash;
+    url = url.replace(hash, '');
+    if (url.indexOf(paramName + "=") >= 0)
+    {
+        var prefix = url.substring(0, url.indexOf(paramName + "=")); 
+        var suffix = url.substring(url.indexOf(paramName + "="));
+        suffix = suffix.substring(suffix.indexOf("=") + 1);
+        suffix = (suffix.indexOf("&") >= 0) ? suffix.substring(suffix.indexOf("&")) : "";
+        url = prefix + paramName + "=" + paramValue + suffix;
+    }
+    else
+    {
+    if (url.indexOf("?") < 0)
+        url += "?" + paramName + "=" + paramValue;
+    else
+        url += "&" + paramName + "=" + paramValue;
+    }
+    window.location.href = url + hash;
+}
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<html>
+
+<head>
+	<title>Rate Calculator</title>
+	<link rel="shortcut icon" href="logo.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" href="logo.png">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> </head>
+<style>
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+head {
+	font-family: 'Staatliches', cursive;
+}
+
+body {
+	font-family: 'Staatliches', cursive;
+	background-color: TEAL;
+	color: white;
+}
+
+.image {
+	object-fit: contain;
+	border: 3.5px solid #ffff;
+}
+
+th,
+td {
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #72003f;
+}
+</style>
+
+<body>
+    <br>
+    <br>
+    <button onclick="ExportExcel('xlsx')" style="width: 500px ;">Export table to excel</button>
+    <br>
+    <br>
+
+	<div style="overflow-x:auto;">
+		<table id="exportable_table" class="table table-bordered"> 
+			<thead style="background-color: rgb(71, 2, 35);">
+                <th>S.No</th>
+				<th>Frame Szie</th>
+				<th>Count</th>
+				<th>Rate</th>
+			</thead>
+			<tbody id="tbody1"> </tbody>
+		</table>
+		<p id="demo"></p>
+	</div>
+	<button id ="total" style="width: 200px ;">Total Amount:0</button>
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+	<script id="MainScript">
+	$(document).ready(function() {
+		$('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').parent().closest('a').closest('div').remove();
+	});
+	var firebaseConfig = {
+		apiKey: "AIzaSyAJBdhYlg5xFu1MQOzPQjaiWyheBOHMAN0",
+		authDomain: "srgifts-4cccb.firebaseapp.com",
+		databaseURL: "https://srgifts-4cccb-default-rtdb.asia-southeast1.firebasedatabase.app",
+		projectId: "srgifts-4cccb",
+		storageBucket: "srgifts-4cccb.appspot.com",
+		messagingSenderId: "662372730784",
+		appId: "1:662372730784:web:f9c8ffc3a7e48f7ea0c6c5",
+		measurementId: "G-JLV996E31W"
+	};
+	firebase.initializeApp(firebaseConfig);
+	var list = [];
+	var FrameSize = [];
+	var Rate = {};
+    Rate["12x12"] = 490
+    Rate["15x15"] = 850
+    Rate["12x18"] = 580
+    Rate["10x8"]  = 380
+    Rate["20x16"] = 1250
+    Rate["12x15"] = 490
+    Rate["12x5"]  = 350
+    Rate["10x10"] = 490
+    Rate["12x8"]  = 390
+    Rate["24x16"] = 1600
+    Rate["20x30"] = 2000
+    Rate["8x6"]   = 320
+    Rate["24X12"] = 1200
+    Rate["12x24"] = 1200
+    Rate["18x18"] = 1200
+	let count=0;
+	
+
+	function SelectallData() {
+		firebase.database().ref('OrdertoEdit').once('value', function(AllRecords) {
+			AllRecords.forEach(function(CurrenRecord) {
+				var Framesize = CurrenRecord.val().framesize;
+				list.push(Framesize)
+			});
+			ratecalculation();
+		});
+	}
+	window.onload = SelectallData;
+	function createElement() {
+        let i=1;
+		FrameSize.forEach((element, index, array) => {
+            
+			Additemstotable(i,FrameSize[index].Size,FrameSize[index].Count,FrameSize[index].rate)
+            i=i+1;;
+        })
+		document.getElementById("total").innerHTML="Total Amount: "+ count.toLocaleString("en-US")
+		//count.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+	}
+
+	function ratecalculation(){
+		// FrameSize
+        const uniqueString = [...new Set(list)];
+		//console.log(uniqueString);	
+		const counts = {};
+        for (const num of list) {
+        counts[num] = counts[num] ? counts[num] + 1 : 1;
+        }
+        
+		uniqueString.forEach((element, index, array) => {
+			FrameSize.push({
+            Size:element,
+			Count:counts[element],
+			rate:Rate[element]*counts[element]
+			})
+			count=count+Rate[element]*counts[element];
+        })
+		createElement()
+		//console.log(count);
+//console.log(FrameSize);
+    //console.log(counts[5], counts[2], counts[9], counts[4]);
+
+	}
+    function ExportExcel(type, fn, dl) {
+         var elt = document.getElementById('exportable_table');
+         var wb = XLSX.utils.table_to_book(elt, {sheet:"Sheet JS"});
+         return dl ?
+            XLSX.write(wb, {bookType:type, bookSST:true, type: 'base64'}) :
+            XLSX.writeFile(wb, fn || ('Orders.' + (type || 'xlsx')));
+      }
+	function Additemstotable(index,pagename, orderno, productdetails) {
+		var tbody = document.getElementById('tbody1');
+		var trow = document.createElement('tr');
+		var td1 = document.createElement('td');
+		var td2 = document.createElement('td');
+		var td3 = document.createElement('td');
+		var td4 = document.createElement('td');
+		td1.innerHTML =index ;
+		td2.innerHTML = pagename;
+		td3.innerHTML = orderno;
+		td4.innerHTML = productdetails;
+		trow.appendChild(td1);
+		trow.appendChild(td2);
+		trow.appendChild(td3);
+		trow.appendChild(td4);
+		tbody.appendChild(trow);
+	}
+	</script>
+</body>
+
+</html>

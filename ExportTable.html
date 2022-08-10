@@ -1,0 +1,190 @@
+<html>
+
+<head>
+	<title>ORDER DETAILS</title>
+	<link rel="shortcut icon" href="logo.png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> </head>
+<style>
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+a:link {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: rgb(172, 4, 82);
+  background-color: transparent;
+  text-decoration: underline;
+}
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+head {
+	font-family: 'Staatliches', cursive;
+}
+
+body {
+	font-family: 'Staatliches', cursive;
+	background-color: TEAL;
+	color: white;
+}
+
+.image {
+	object-fit: contain;
+	border: 3.5px solid #ffff;
+}
+
+th,
+td {
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #72003f;
+}
+</style>
+
+<body>
+    <br>
+    <br>
+    <button onclick="ExportExcel('xlsx')" style="width: 500px ;">Export table to excel</button>
+    <br>
+    <br>
+
+	<div style="overflow-x:auto;">
+		<table id="exportable_table" class="table table-bordered"> 
+			<thead style="background-color: rgb(71, 2, 35);">
+                <th>S.No</th>
+				<th>Order No</th>
+				<th>Name</th>
+				<th>Product Details</th>
+				<th>Tracking ID</th>
+				<th>Status</th>
+				<th>PageName</th>
+			</thead>
+           
+			<tbody id="tbody1"> </tbody>
+		</table>
+		<p id="demo"></p>
+	</div>
+    <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-database.js"></script>
+	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+	<script id="MainScript">
+	$(document).ready(function() {
+		$('body').find('img[src$="https://cdn.000webhost.com/000webhost/logo/footer-powered-by-000webhost-white2.png"]').parent().closest('a').closest('div').remove();
+	});
+	var firebaseConfig = {
+		apiKey: "AIzaSyAJBdhYlg5xFu1MQOzPQjaiWyheBOHMAN0",
+		authDomain: "srgifts-4cccb.firebaseapp.com",
+		databaseURL: "https://srgifts-4cccb-default-rtdb.asia-southeast1.firebasedatabase.app",
+		projectId: "srgifts-4cccb",
+		storageBucket: "srgifts-4cccb.appspot.com",
+		messagingSenderId: "662372730784",
+		appId: "1:662372730784:web:f9c8ffc3a7e48f7ea0c6c5",
+		measurementId: "G-JLV996E31W"
+	};
+	firebase.initializeApp(firebaseConfig);
+	var list = [];
+
+	function SelectallData() {
+		firebase.database().ref('OrdertoEdit').once('value', function(AllRecords) {
+			AllRecords.forEach(function(CurrenRecord) {
+				var orderno = CurrenRecord.val().OrderNo;
+				var page = CurrenRecord.val().Pagename;
+				var status = CurrenRecord.val().Status;
+				var productName = CurrenRecord.val().ProductName;
+				var Framesize = CurrenRecord.val().framesize;
+				var Address = String(CurrenRecord.val().address);
+				var Text = CurrenRecord.val().text;
+				var Info = CurrenRecord.val().info;
+				var trackingId = CurrenRecord.val().TrackingId;
+				if(trackingId == "N") {
+					trackingId = "Available after Dispatch"
+				}
+				var EditedImage = CurrenRecord.val().editedImage;
+				var Mainimage = CurrenRecord.val().mainimage;
+				list.push({
+					OrderNo: orderno,
+					ProductName: productName,
+					framesize: Framesize,
+					address: (Address.split("\n"))[0],
+					Pagename: page,
+					text: Text,
+					info: Info,
+					Status: status,
+					TrackingId: trackingId,
+					editedImage: EditedImage,
+					mainimage: Mainimage
+				})
+			});
+			createElement();
+		});
+	}
+	window.onload = SelectallData;
+
+	function createElement() {
+        let i=1;
+        console.log(list.length);
+		list.forEach((element, index, array) => {
+            var orderNo=String(list[index].OrderNo).split("-");
+			Additemstotable(i,list[index].Pagename, orderNo, list[index].address, list[index].ProductName + "-" + list[index].framesize, list[index].TrackingId, list[index].Status, list[index].mainimage, list[index].editedImage)
+            i=i+1;;
+        })
+	}
+    function ExportExcel(type, fn, dl) {
+         var elt = document.getElementById('exportable_table');
+         var wb = XLSX.utils.table_to_book(elt, {sheet:"Sheet JS"});
+         return dl ?
+    
+            XLSX.write(wb, {bookType:type, bookSST:true, type: 'base64'}) :
+            XLSX.writeFile(wb, fn || ('Orders.' + (type || 'xlsx')));
+      }
+
+
+	function Additemstotable(index,pagename, orderno, name, productdetails, trackingId, status, mainimage, image) {
+		var tbody = document.getElementById('tbody1');
+		var trow = document.createElement('tr');
+		var td1 = document.createElement('td');
+		var td2 = document.createElement('td');
+		var td3 = document.createElement('td');
+		var td4 = document.createElement('td');
+		var td5 = document.createElement('td');
+		var td6 = document.createElement('td');
+        var td7 = document.createElement('td');
+		td1.innerHTML =index ;
+		td2.innerHTML = " <a href= \"https://srgiftanddesign.000webhostapp.com/Tracking.html?OrderNo="+orderno[1]+"\">"+(orderno[0]+"-"+orderno[1])+"</a>";
+		td3.innerHTML = name;
+		td4.innerHTML = productdetails;
+		td5.innerHTML = trackingId;
+		td6.innerHTML = status;
+        td7.innerHTML = pagename;
+		trow.appendChild(td1);
+		trow.appendChild(td2);
+		trow.appendChild(td3);
+		trow.appendChild(td4);
+		trow.appendChild(td5);
+		trow.appendChild(td6);
+        trow.appendChild(td7);
+		tbody.appendChild(trow);
+	}
+	</script>
+</body>
+
+</html>

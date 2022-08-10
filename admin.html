@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<title>SR GIFTS AND DESIGNS</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="/Css/admin.css">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+
+</style>
+<body class="w3-light-grey">
+      <div id="flase" class="expire">
+        <p><img src="Images/pngegg (1).png" width="150px" height="150px"></p>
+        <p>Your Session is expired Please Re-login</p>
+        <a href="adminLogin.html">Login Page</a>
+      </div>
+  <div id="true" style="visibility: hidden;display: none;">
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i>  Menu</button>
+  <span class="w3-bar-item w3-right">SR GIFTS</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <div class="w3-col s4">
+      <img id="dp" src="/Images/sr copy.jpg" class="w3-circle w3-margin-right" style="width:60px">
+    </div>
+    <div class="w3-col s8 w3-bar">
+      <span>Welcome, <strong id="username">SabariRam</strong></span><br>
+      <a href="https://mail.google.com/mail/u/1/#inbox" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i></a>
+      <a href="https://www.instagram.com/sr__creation__/" class="w3-bar-item w3-button"><i class="fa fa-user"></i></a>
+      <a href="https://customizedgiftsservices.000webhostapp.com/" class="w3-bar-item w3-button"><i class="fa fa-cog"></i></a>
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>Dashboard</h5>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black" onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+    <a href="admin.html" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-users fa-fw"></i>  Overview</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-eye fa-fw"></i>Today Dispatch</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-users fa-fw"></i>Order Upload</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bullseye fa-fw"></i>Tracking</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-diamond fa-fw"></i>Place Your Order</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-bell fa-fw"></i>Sigin/Signup</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-cog fa-fw"></i>  Reseller Shop</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding"><i class="fa fa-history fa-fw"></i>History</a><br><br>
+  </div>
+</nav>
+
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:300px;margin-top:43px;">
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+    <h5><b><i class="fa fa-dashboard"></i> My Dashboard</b></h5>
+  </header>
+
+  <div class="w3-row-padding w3-margin-bottom">
+    <div class="w3-quarter">
+      <div class="w3-container w3-red w3-padding-16">
+        <div class="w3-left"><i><img src="/Images/happy.png" width="50px" height="50px"></i></div>
+        <div class="w3-right">
+          <h3 id="happyCustomer">52</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>HAPPY CUSTOMERS</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-blue w3-padding-16">
+        <div class="w3-left"><i><img src="/Images/today.png" width="50px" height="50px"></i></div>
+        <div class="w3-right">
+          <h3 id="
+          " >99</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>TODAY ORDERS</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-teal w3-padding-16">
+        <div class="w3-left"><i ><img src="/Images/edit.png" width="50px" height="50px"></i></div>
+        <div class="w3-right">
+          <h3>23</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>ORDERS TO EDIT</h4>
+      </div>
+    </div>
+    <div class="w3-quarter">
+      <div class="w3-container w3-orange w3-text-white w3-padding-16">
+        <div class="w3-left"><i><img src="/Images/dispatch.png" width="50px" height="50px"></i></div>
+        <div class="w3-right">
+          <h3>50</h3>
+        </div>
+        <div class="w3-clear"></div>
+        <h4>DISPATCHED</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="w3-panel">
+    <div class="w3-row-padding" style="margin:0 -16px">
+      <!-- <div class="w3-third">
+        <h5>Recent Orders</h5>
+        <img id="RecentOrders"src="/Images/7.jpg" style="width:100%" onmouseover="showSlides()">
+      </div> -->
+      <div class="w3-twothird" id="newOrders" style="width:100%">
+        <h5>New Orders</h5>
+         <div class="grow">
+            <a class="left">Mosaic Frame</a><a class="left">12X18 Inches</a> 
+            <a class="left">Lovestore</a> <a href=""class="left">Download</a> 
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature</p>
+          </div>
+          <div class="grow1">
+            <a class="left">Mosaic Frame</a><a class="left">12X18 Inches</a> 
+            <a class="left">Lovestore</a> <a href=""class="left">Download</a> 
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature</p>
+          </div>
+          <div class="grow" style="background-color: rgb(8, 139, 96);">
+            <a class="left">Mosaic Frame</a><a class="left">12X18 Inches</a> 
+            <a class="left">Lovestore</a> <a href=""class="left">Download</a> 
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature</p>
+          </div>
+          <div class="grow1" style="background-color: rgb(139, 8, 69);">
+            <a class="left">Mosaic Frame</a><a class="left">12X18 Inches</a> 
+            <a class="left">Lovestore</a> <a href=""class="left">Download</a> 
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature</p>
+          </div>
+          <div class="grow">
+            <a class="left">Mosaic Frame</a><a class="left">12X18 Inches</a> 
+            <a class="left">Lovestore</a> <a href=""class="left">Download</a> 
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature</p>
+          </div>
+          <div class="grow1">
+            <a class="left">Mosaic Frame</a><a class="left">12X18 Inches</a> 
+            <a class="left">Lovestore</a> <a href=""class="left">Download</a> 
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature</p>
+          </div>
+          <div class="grow" style="background-color: rgb(8, 139, 96);">
+            <a class="left">Mosaic Frame</a><a class="left">12X18 Inches</a> 
+            <a class="left">Lovestore</a> <a href=""class="left">Download</a> 
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature</p>
+          </div>
+          <div class="grow1" style="background-color: rgb(139, 8, 69);">
+            <a class="left">Mosaic Frame</a><a class="left">12X18 Inches</a> 
+            <a class="left">Lovestore</a> <a href=""class="left">Download</a> 
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature</p>
+          </div>
+          <div class="grow">
+            <a class="left">Mosaic Frame</a><a class="left">12X18 Inches</a> 
+            <a class="left">Lovestore</a> <a href=""class="left">Download</a> 
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature</p>
+          </div>
+          <div class="grow1">
+            <a class="left">Mosaic Frame</a><a class="left">12X18 Inches</a> 
+            <a class="left">Lovestore</a> <a href=""class="left">Download</a> 
+            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature</p>
+          </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>Order Status</h5>
+    <p>Total</p>
+    <div class="w3-grey">
+      <div class="w3-container w3-center w3-padding w3-green" style="width:55%">+55%</div>
+    </div>
+
+    <p>Dispatched</p>
+    <div class="w3-grey">
+      <div class="w3-container w3-center w3-padding w3-orange" style="width:50%">50%</div>
+    </div>
+
+    <p>On Process</p>
+    <div class="w3-grey">
+      <div class="w3-container w3-center w3-padding w3-red" style="width:75%">75%</div>
+    </div>
+  </div>
+  <hr>
+
+  <div class="w3-container">
+    <h5>Resellers</h5>
+    <table class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+      <tr>
+        <td>Online Shopping Cart</td>
+        <td>65</td>
+      </tr>
+      <tr>
+        <td>Lovestore</td>
+        <td>15</td>
+      </tr>
+      <tr>
+        <td>Giftspot</td>
+        <td>100</td>
+      </tr>
+      <tr>
+        <td>Loverskart</td>
+        <td>2</td>
+      </tr>
+    </table>
+    <!-- <button class="w3-button w3-dark-grey">More Countries  <i class="fa fa-arrow-right"></i></button> -->
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>Recent Orders</h5>
+    <div class="w3-row">
+      <div class="w3-col m2 text-center">
+        <img class="w3-circle" src="/Images/1q.jpg" style="width:96px;height:96px">
+      </div>
+      <div class="w3-col m10 w3-container">
+        <h4>John <span class="w3-opacity w3-medium">Sep 29, 2014</span></h4>
+        <p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
+      </div>
+    </div>
+
+    <div class="w3-row">
+      <div class="w3-col m2 text-center">
+        <img class="w3-circle" src="/Images/12x18.jpg" style="width:96px;height:96px">
+      </div>
+      <div class="w3-col m10 w3-container">
+        <h4>Bo <span class="w3-opacity w3-medium">Sep 28, 2014</span></h4>
+        <p>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><br>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="w3-container w3-dark-grey w3-padding-32">
+    <div class="w3-row">
+      <div class="w3-container w3-third">
+        <h5 class="w3-bottombar w3-border-green">Editors</h5>
+        <p>SabariRam</p>
+        <p>Ram</p>
+      </div>
+      <div class="w3-container w3-third">
+        <h5 class="w3-bottombar w3-border-red">Framing</h5>
+        <p>Karthik-80569 85013</p>
+        <p>Prakash-96000 57547</p>
+      </div>
+      <div class="w3-container w3-third">
+        <h5 class="w3-bottombar w3-border-orange">Resellers</h5>
+        <p>Lovestore</p>
+        <p>Loverskart</p>
+        <p>Online Shopping Cart</p>
+        <p>Giftspot</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- End page content -->
+</div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.js"> </script>
+<script src="/js/admin.js"></script>
+<script src="/js/common.js"></script>
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+
+var dp=localStorage.getItem("Username");
+
+if(dp=="Sr")
+{
+  var slides = document.getElementById("dp");
+  slides.src="/Images/sr copy.jpg";
+  document.getElementById("username").innerHTML=dp;
+  
+}
+else
+{
+  var slides = document.getElementById("dp");
+  slides.src="/Images/loki.jpg";
+  document.getElementById("username").innerHTML=dp;
+}
+</script>
+
+</body>
+</html>
